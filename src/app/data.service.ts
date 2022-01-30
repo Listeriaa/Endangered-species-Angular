@@ -31,10 +31,13 @@ export class DataService {
   getList(): Observable<Specie[]> {
 
     const url = `${this.apiUrl}/list`
+    const list = this.http.get<Specie[]>(url)
     
     return this.http.get<Specie[]>(url)
     .pipe(
       
       catchError(this.handleError('getList', [])))
   }
+
+
 }

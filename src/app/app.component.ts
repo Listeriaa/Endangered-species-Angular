@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { DataService } from './data.service';
 import { Specie } from './specie';
 
@@ -12,10 +13,13 @@ export class AppComponent {
 
   constructor(private dataService : DataService) { }
 
-  list?: Specie[]
+  list$?: Observable<Specie[]>;
 
-  ngOnInit(): void {
+  numberSpecies?: number;
 
-    this.dataService.getList().subscribe(list => this.list = list)
+  ngOnInit() {
+    //as list$ is typed as Observable, no need for subscription
+    this.list$ = this.dataService.getList()
+    
   }
 }

@@ -16,23 +16,16 @@
     </div>
   </div>
 
-  <!-- <div *ngIf="list; else elseBlock">J'ai une liste</div>
-  <ng-template #elseBlock>
-    <strong>Loading...</strong>
-    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
-  </ng-template> -->
-  <div class="row row-cols-auto d-flex justify-content-center">
-    <div class="col col-md-auto  my-3 ">
-    <div *ngIf="list; else elseBlock" class="loading-page d-flex align-items-center my-3">
-      <app-card *ngFor="let specie of list" [specie]="specie"></app-card>
-    </div>
+  <div *ngIf="list$ | async; else loadingBlock" class="row row-cols-auto d-flex justify-content-center">
+    <app-card *ngFor="let specie of list$ |async" [specie]="specie"></app-card>
   </div>
-    <ng-template #elseBlock>
-      <strong>Loading...</strong>
-      <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
-    </ng-template>
-  </div>
+  <ng-template #loadingBlock>
+    <app-spinner></app-spinner>
+  </ng-template>
+
 </div>
+
+
 
 <!-- <app-card></app-card> -->
 

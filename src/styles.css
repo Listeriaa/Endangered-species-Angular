@@ -1,2 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bootstrap/dist/css/bootstrap.css"
+@import "~bootstrap/dist/css/bootstrap.css";
+
+#vanta-canvas{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    z-index : -1;
+}
+
+.bg-orange {
+    background-color: rgb(241, 119, 48);
+}

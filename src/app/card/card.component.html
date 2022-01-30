@@ -1,29 +1,26 @@
 <div class="col col-md-auto  my-3 ">
     <div class="card text-center" style="width: 18rem;">
-      <div class="card-body shadow ">
-        <h5 class="card-title text-uppercase fw-bold">bonjour</h5>
-        <h5 class="card-subtitle my-3 text-muted">
-          <span class="badge bg-gradient">hello</span>
-        </h5>
+        <div class="card-body shadow ">
+            <h5 *ngIf="specie" class="card-title text-uppercase fw-bold">{{specie.scientific_name}}</h5>
+            <h5 class="card-subtitle my-3 text-muted">
+                <span class="badge bg-gradient"></span>
+            </h5>
 
-        <button type="button" class="btn" type="button" data-bs-toggle="collapse" aria-expanded="false">En savoir
-          plus</button>
+            <button type="button" class="btn" type="button" data-bs-toggle="collapse" aria-expanded="false">En savoir
+                plus</button>
 
-        <div class="collapse test my-3" data-open="false">
-          <div class="card card-info card-body d-flex justify-content-center">
-            <a class="link-dark fw-bold mb-3" target="_blank">Fiche détaillée de l'IUCN</a>
-            <div class="loading d-flex align-items-center my-3">
-              <strong>Loading...</strong>
-              <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+            <div class="collapse test my-3" data-open="false">
+                <div class="card card-info card-body d-flex justify-content-center">
+                    <a class="link-dark fw-bold mb-3" target="_blank">Fiche détaillée de l'IUCN</a>
+                    <app-spinner></app-spinner>
+                    <app-spinner></app-spinner>
+                    <!-- <div class="threat d-flex align-items-center">
+                        <strong>Loading...</strong>
+                        <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                    </div> -->
+                </div>
+
             </div>
-            <div class="threat d-flex align-items-center">
-              <strong>Loading...</strong>
-              <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
-            </div>
-          </div>
-
         </div>
-      </div>
     </div>
-  </div>
-
+</div>
