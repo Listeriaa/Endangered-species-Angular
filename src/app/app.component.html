@@ -16,17 +16,27 @@
     </div>
   </div>
 
+  <!-- <div *ngIf="list; else elseBlock">J'ai une liste</div>
+  <ng-template #elseBlock>
+    <strong>Loading...</strong>
+    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+  </ng-template> -->
   <div class="row row-cols-auto d-flex justify-content-center">
-    <div class="loading-page d-flex align-items-center my-3">
+    <div class="col col-md-auto  my-3 ">
+    <div *ngIf="list; else elseBlock" class="loading-page d-flex align-items-center my-3">
+      <app-card *ngFor="let specie of list" [specie]="specie"></app-card>
+    </div>
+  </div>
+    <ng-template #elseBlock>
       <strong>Loading...</strong>
       <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
-    </div>
+    </ng-template>
   </div>
 </div>
 
-<app-card></app-card>
+<!-- <app-card></app-card> -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
 <script>
   VANTA.BIRDS({
@@ -48,4 +58,4 @@
     backgroundAlpha: 0.73,
 
   })
-</script>
+</script> -->
