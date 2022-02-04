@@ -1,9 +1,9 @@
-<div *ngIf="specie" class="col col-md-auto  my-3 ">
+<div *ngIf="specie"  class="col col-md-auto  my-3 ">
     <div class="card text-center" style="width: 18rem;">
         <div class="card-body shadow ">
             <h5  class="card-title text-uppercase fw-bold">{{specie.scientific_name}}</h5>
-            <h5 class="card-subtitle my-3 text-muted">
-                <span class="badge bg-gradient">{{specie.category}}</span>
+            <h5 *ngIf="category" class="card-subtitle my-3 text-muted">
+                <span [class]="category.badgeClass" class="badge bg-gradient">{{category.categoryMessage}}</span>
             </h5>
 
             <button type="button" class="btn" type="button" data-bs-toggle="collapse" aria-expanded="false">En savoir

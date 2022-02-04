@@ -3,10 +3,39 @@ import { DataService } from '../data.service';
 import { Specie } from '../specie';
 
 interface Category  {
-  categoryMessage :string,
-  badgeClass: string,
-  badgeColorText?: string
+  categoryName: "CR" | "VU" | "EX" | "EW" | "EN"
+  categoryMessage :string
+  badgeClass: string
+
 }
+const CR: Category = {
+  categoryName: "CR",
+  categoryMessage: "En danger critique",
+  badgeClass: "bg-danger",
+}
+const VU: Category = {
+  categoryName: "VU",
+  categoryMessage: "Vulnérable",
+  badgeClass: "bg-warning text-dark"
+}
+
+const EX: Category = {
+  categoryName: "EX",
+  categoryMessage: "Eteint",
+  badgeClass: "bg-dark",
+}
+const EW: Category = {
+  categoryName: "EW",
+  categoryMessage: "Eteint à l'état sauvage",
+  badgeClass: "bg-dark",
+}
+const EN: Category = {
+  categoryName: "EN",
+  categoryMessage: "En danger",
+  badgeClass: "bg-danger text-dark"
+}
+const categoryOption  = [CR, EX, EW, EN, VU]
+
 
 @Component({
   selector: 'app-card',
@@ -25,41 +54,17 @@ export class CardComponent implements OnInit {
   
   category? : Category
 
-  categoryOption  = {
-    CR :{
-      categoryMessage: "En danger critique",
-      badgeClass: "bg-danger",
-    },
-    VU :{
-      categoryMessage: "Vulnérable",
-      badgeClass: "bg-warning",
-      badgeColorText:"text-dark"
-    },
-    EX :{
-      categoryMessage: "Eteint",
-      badgeClass: "bg-dark",
-    },
-    EW :{
-      categoryMessage: "Eteint à l'état sauvage",
-      badgeClass: "bg-dark",
-    },
-    EN :{
-      categoryMessage: "En danger",
-      badgeClass: "bg-success",
-      badgeColorText:"text-dark"
-    },
-
-  }
   constructor() {}
   
 
   ngOnInit(): void {
-    console.log(this.specie)
-    this.getCategoryOption(this.specie!.category, this.categoryOption)
+    
+    this.getCategoryOption(this.specie!.category, categoryOption)
   }
 
-  private getCategoryOption<T, C extends keyof T>(category : C, catOption: T ): void {
-    this.category = catOption[category]
+  private getCategoryOption(category :string, catOption : Category[]): void{
+    const currentCat = catOption.filter(cat => cat.categoryName === category)
+    this.category = currentCat[0]
   }
   
 }
