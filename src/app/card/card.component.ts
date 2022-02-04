@@ -1,40 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Specie } from '../specie';
-
-interface Category  {
-  categoryName: "CR" | "VU" | "EX" | "EW" | "EN"
-  categoryMessage :string
-  badgeClass: string
-
-}
-const CR: Category = {
-  categoryName: "CR",
-  categoryMessage: "En danger critique",
-  badgeClass: "bg-danger",
-}
-const VU: Category = {
-  categoryName: "VU",
-  categoryMessage: "Vulnérable",
-  badgeClass: "bg-warning text-dark"
-}
-
-const EX: Category = {
-  categoryName: "EX",
-  categoryMessage: "Eteint",
-  badgeClass: "bg-dark",
-}
-const EW: Category = {
-  categoryName: "EW",
-  categoryMessage: "Eteint à l'état sauvage",
-  badgeClass: "bg-dark",
-}
-const EN: Category = {
-  categoryName: "EN",
-  categoryMessage: "En danger",
-  badgeClass: "bg-danger text-dark"
-}
-const categoryOption  = [CR, EX, EW, EN, VU]
+import { Category, categoryOption } from '../category';
 
 
 @Component({
@@ -45,18 +12,11 @@ const categoryOption  = [CR, EX, EW, EN, VU]
 export class CardComponent implements OnInit {
 
   @Input() specie?: Specie
-  
-  categoryMessage?: string
-  
-  badgeClass?: string
-  
-  badgeColorText?: string
-  
+    
   category? : Category
 
   constructor() {}
   
-
   ngOnInit(): void {
     
     this.getCategoryOption(this.specie!.category, categoryOption)
