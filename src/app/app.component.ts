@@ -20,6 +20,6 @@ export class AppComponent {
   ngOnInit() {
     //as list$ is typed as Observable, no need for subscription
     this.list$ = this.dataService.getList()
-    
+    console.log(this.list$)
   }
 }

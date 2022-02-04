@@ -5,5 +5,5 @@ export interface Specie
     "subspecies": null | string,
     "rank": null | string,
     "subpopulation": null | string,
-    "category": string
+    "category": "CR" | "VU" | "EX" | "EW" | "EN"
 }
