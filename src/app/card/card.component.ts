@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { Specie } from '../specie';
+import { Specie, classSpecie } from '../specie';
 import { Observable } from 'rxjs';
 
 import { Category, categoryOption } from '../category';
@@ -17,14 +17,16 @@ export class CardComponent implements OnInit {
     
   category? : Category
   
-  class? : string
+  class? :keyof typeof classSpecie
 
+  frenchClass? : string
+  
   constructor(private  dataService: DataService) {}
   
   ngOnInit(): void {
     
     this.getCategoryOption(this.specie!.category, categoryOption)
-    this.dataService.getClass(this.specie!.taxonid).subscribe(item => this.class = item)
+    this.dataService.getClass(this.specie!.taxonid).subscribe((item : keyof typeof classSpecie)=> this.class= item)
     
   }
 
@@ -33,4 +35,7 @@ export class CardComponent implements OnInit {
     this.category = currentCat[0]
   }
   
+  private getFrenchClass() {
+    
+  }
 }

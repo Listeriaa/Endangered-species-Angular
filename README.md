@@ -19,9 +19,10 @@ Re-working the app about endangered species to train myself on Angular (framewor
 
 ## WIP
 
-- Managed to get list of species from API (Observable...)
-- Managed to attribute a threat category with options (french name, bootstrap class...) depending on the threat category sent by the API
-- Managed to pass a specie on the componant Card
+- **Feb 2022**: Managed to get list of species from API (Observable...)
+- **Feb 2022**: Managed to attribute a threat category with options (french name, bootstrap class...) depending on the threat category sent by the API
+- **Feb 2022**: Managed to pass a specie on the componant Card
+- **Feb 2022**: Working on classSpecie, received in latin language from API and i would like it to be in French.
 
 ## Challenge 
 
@@ -30,4 +31,4 @@ Re-working the app about endangered species to train myself on Angular (framewor
 ## TODO
 
 - Still a lot to do, especially the collapse "more info" (need another fetch to API to get french name and type of threats).
-- I would like to add a filter on categories
+- I would like to add a filter on categories.
