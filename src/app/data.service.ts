@@ -36,14 +36,23 @@ export class DataService {
   getList(): Observable<Specie[]> {
 
     const url = `${this.apiUrl}country/getspecies/FR?token=${environment.apiKey}`
-    //const url = `${this.apiUrl}/list`
-    const list = this.http.get(url)
+ 
     return this.http.get<any>(url)
     .pipe(
+      
       map(response => response.result.filter((item: Specie)=> item.category === "CR" || item.category === "EN" || item.category === "VU" || item.category === "EX" || item.category === "EW")),
-      //tap(item => console.log(item)),
       catchError(this.handleError('getList', [])))
   }
 
+  getClass(taxonid: number) {
+    //console.log("je suis dans getClass")
+    const url = `${this.apiUrl}species/id/${taxonid}?token=${environment.apiKey}`
+    return this.http.get<any>(url)
+    .pipe(
 
+      map(response => response.result[0].class),
+      tap(item =>console.log(item)),
+      catchError(this.handleError('getClass', []))
+    )
+  } 
 }

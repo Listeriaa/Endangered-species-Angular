@@ -5,7 +5,7 @@
             <h5 *ngIf="category" class="card-subtitle my-3 text-muted">
                 <span [class]="category.badgeClass" class="badge bg-gradient">{{category.categoryMessage}}</span>
             </h5>
-
+            <p *ngIf="class">{{class}}</p>
             <button type="button" class="btn" type="button" data-bs-toggle="collapse" aria-expanded="false">En savoir
                 plus</button>
 

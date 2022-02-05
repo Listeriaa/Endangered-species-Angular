@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Specie } from '../specie';
+import { Observable } from 'rxjs';
+
 import { Category, categoryOption } from '../category';
 
 
@@ -14,12 +16,16 @@ export class CardComponent implements OnInit {
   @Input() specie?: Specie
     
   category? : Category
+  
+  class? : string
 
-  constructor() {}
+  constructor(private  dataService: DataService) {}
   
   ngOnInit(): void {
     
     this.getCategoryOption(this.specie!.category, categoryOption)
+    this.dataService.getClass(this.specie!.taxonid).subscribe(item => this.class = item)
+    
   }
 
   private getCategoryOption(category :string, catOption : Category[]): void{
