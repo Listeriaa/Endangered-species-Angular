@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { Specie, classSpecie } from '../specie';
+import { Specie, classArray } from '../specie';
 import { Observable } from 'rxjs';
+import { ClassApi } from '../typeApi';
 
 import { Category, categoryOption } from '../category';
 
@@ -17,25 +18,40 @@ export class CardComponent implements OnInit {
     
   category? : Category
   
-  class? :keyof typeof classSpecie
-
-  frenchClass? : string
+  class? :ClassApi
   
   constructor(private  dataService: DataService) {}
   
   ngOnInit(): void {
     
     this.getCategoryOption(this.specie!.category, categoryOption)
-    this.dataService.getClass(this.specie!.taxonid).subscribe((item : keyof typeof classSpecie)=> this.class= item)
+    this.dataService.getClass(this.specie!.taxonid).subscribe((item)=> this.class = this.getFrenchClass(item, classArray))
     
   }
 
+  /**
+   * Method to attribute bootstrap classes and french category with the category property from API to the class property of component
+   * @param category category from the specie object from api
+   * @param catOption array of categories with their bootstrap options
+   */
   private getCategoryOption(category :string, catOption : Category[]): void{
-    const currentCat = catOption.filter(cat => cat.categoryName === category)
-    this.category = currentCat[0]
+    const currentCat = catOption.find(cat => cat.categoryName === category)
+    this.category = currentCat
   }
   
-  private getFrenchClass() {
+  /**
+   * Method to get the french class group of the specie
+   * @param latinClass name of the latin class get with the getClass method from dataservice
+   * @param classArray array of classes with latin and french name
+   * @returns 
+   */
+  private getFrenchClass(latinClass : string, classArray : ClassApi[]) : ClassApi |undefined {
+
+    return classArray.find(item => item.latinName == latinClass)
     
+  }
+
+  handleClick() {
+    this.dataService.getDetail(this.specie!.scientific_name).subscribe(item => console.log(item.taxonname))
   }
 }

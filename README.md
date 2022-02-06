@@ -22,7 +22,8 @@ Re-working the app about endangered species to train myself on Angular (framewor
 - **Feb 2022**: Managed to get list of species from API (Observable...)
 - **Feb 2022**: Managed to attribute a threat category with options (french name, bootstrap class...) depending on the threat category sent by the API
 - **Feb 2022**: Managed to pass a specie on the componant Card
-- **Feb 2022**: Working on classSpecie, received in latin language from API and i would like it to be in French.
+- **Feb 2022**: Managed to attribute bootstrap classes and french phylogenic class depending on props
+- **Feb 2022**: Working on french common_name => fetch to api ok, need to work on data treatment (name can be either in French, in English or empty)
 
 ## Challenge 
 

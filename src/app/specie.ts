@@ -1,5 +1,7 @@
-export interface Specie
-{
+import { ClassApi } from './typeApi';
+
+
+export interface Specie {
     "taxonid": number,
     "scientific_name": string,
     "subspecies": null | string,
@@ -8,29 +10,95 @@ export interface Specie
     "category": "CR" | "VU" | "EX" | "EW" | "EN"
 }
 
-export const classSpecie = {
-    GASTROPODA :'Gastéropode',
-    ACTINOPTERYGII :'Poisson osseux',
-    LILIOPSIDA :'Plante',
-    MAGNOLIOPSIDA :'Plante',
-    AVES :'Oiseau',
-    CHONDRICHTHYES :'Poisson cartilagineux',
-    AGARICOMYCETES :'Champignon',
-    INSECTA :'Insecte',
-    ANDREAEOPSIDA :'Mousse (végétal)',
-    BRYOPSIDA :'Mousse (végétal)',
-    MAMMALIA :'Mammifère',
-    MALACOSTRACA :'Crustacé',
-    LECANOROMYCETES :'Champignon',
-    REPTILIA :'Reptile',
-    ANTHOZOA :'Cnidaires',
-    POLYPODIOPSIDA :'Plante',
-    BIVALVIA :'Mollusque',
-    AMPHIBIA :'Amphibien',
-    JUNGERMANNIOPSIDA :'Plante',
-    GEOGLOSSOMYCETES :'Champignon',
-    ARACHNIDA :'Arachnides',
-    MARCHANTIOPSIDA :'Plante'
+export const classArray: ClassApi[] = [
+    {
+        latinName: 'GASTROPODA',
+        frenchName: 'Gastéropode',
+    },
+    {
+        latinName: 'ACTINOPTERYGII',
+        frenchName: 'Poisson osseux'
+    },
+    {
+        latinName: 'LILIOPSIDA',
+        frenchName: 'Plante'
+    },
+    {
+        latinName: 'MAGNOLIOPSIDA',
+        frenchName: 'Plante'
+    },
+    {
+        latinName: 'AVES',
+        frenchName: 'Oiseau'
+    },
+    {
+        latinName: 'CHONDRICHTHYES',
+        frenchName: 'Poisson cartilagineux'
+    },
+    {
+        latinName: 'AGARICOMYCETES',
+        frenchName: 'Champignon'
+    },
+    {
+        latinName: 'INSECTA',
+        frenchName: 'Insecte'
+    },
+    {
+        latinName: 'ANDREAEOPSIDA',
+        frenchName: 'Mousse (végétal)'
+    },
+    {
+        latinName: 'BRYOPSIDA',
+        frenchName: 'Mousse (végétal)'
+    },
+    {
+        latinName: 'MAMMALIA',
+        frenchName: 'Mammifère'
+    },
+    {
+        latinName: 'MALACOSTRACA',
+        frenchName: 'Crustacé'
+    },
+    {
+        latinName: 'LECANOROMYCETES',
+        frenchName: 'Champignon'
+    },
+    {
+        latinName: 'REPTILIA',
+        frenchName: 'Reptile'
+    },
+    {
+        latinName: 'ANTHOZOA',
+        frenchName: 'Cnidaires'
+    },
+    {
+        latinName: 'POLYPODIOPSIDA',
+        frenchName: 'Plante'
+    },
+    {
+        latinName: 'BIVALVIA',
+        frenchName: 'Mollusque'
+    },
+    {
+        latinName: 'AMPHIBIA',
+        frenchName: 'Amphibien'
+    },
+    {
+        latinName: 'JUNGERMANNIOPSIDA',
+        frenchName: 'Plante'
+    },
+    {
+        latinName: 'GEOGLOSSOMYCETES',
+        frenchName: 'Champignon'
+    },
+    {
+        latinName: 'ARACHNIDA',
+        frenchName: 'Arachnides'
+    },
+    {
+        latinName: 'MARCHANTIOPSIDA',
+        frenchName: 'Plante'
+    }
 
 
-}
+]
