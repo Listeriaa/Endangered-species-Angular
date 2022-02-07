@@ -16,8 +16,8 @@
     </div>
   </div>
 
-  <div *ngIf="list$ | async; else loadingBlock" class="row row-cols-auto d-flex justify-content-center">
-    <app-card *ngFor="let specie of list$ |async" [specie]="specie"></app-card>
+  <div *ngIf="list$ |async; else loadingBlock" class="row row-cols-auto d-flex justify-content-center">
+    <app-card *ngFor="let specie of (list$ |async)" [specie]="specie"></app-card>
   </div>
   <ng-template #loadingBlock>
     <app-spinner></app-spinner>

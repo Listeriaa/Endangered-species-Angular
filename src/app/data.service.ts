@@ -35,11 +35,12 @@ export class DataService {
   getList(): Observable<Specie[]> {
 
     const url = `${this.apiUrl}country/getspecies/FR?token=${environment.apiKey}`
- 
+    
     return this.http.get<any>(url)
     .pipe(
       
       map(response => response.result.filter((item: Specie)=> item.category === "CR" || item.category === "EN" || item.category === "VU" || item.category === "EX" || item.category === "EW")),
+
       catchError(this.handleError('getList', [])))
   }
 
@@ -72,8 +73,6 @@ export class DataService {
     //function to return only classApi type 
     const getData = (latinClass: LatinClass<ClassApi>) => (classArray.find((item) => latinClass === item.latinName) as ClassApi);
 
-    // const result = classArray.find((item: ClassApi )=> item.latinName == latinClass)
-    // const resulttype = typeof result
       return getData(latinClass)
     
   }

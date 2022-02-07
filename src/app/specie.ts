@@ -14,7 +14,8 @@ export interface Specie {
     "subspecies": null | string,
     "rank": null | string,
     "subpopulation": null | string,
-    "category": "CR" | "VU" | "EX" | "EW" | "EN"
+    "category": "CR" | "VU" | "EX" | "EW" | "EN",
+    "class"?: ClassApi
 }
 
 export const classArray: ClassApi[] = [

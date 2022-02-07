@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
 import { DataService } from './data.service';
 import { Specie } from './specie';
 
@@ -19,7 +19,8 @@ export class AppComponent {
 
   ngOnInit() {
     //as list$ is typed as Observable, no need for subscription
-    this.list$ = this.dataService.getList()
+    //shareReplay
+    this.list$ = this.dataService.getList().pipe(shareReplay())
 
   }
 }

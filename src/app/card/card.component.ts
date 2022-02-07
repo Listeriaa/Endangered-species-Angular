@@ -37,17 +37,6 @@ export class CardComponent implements OnInit {
     this.category = catOption.find(cat => cat.categoryName === category)
   }
   
-  /**
-   * Method to get the french class group of the specie
-   * @param latinClass name of the latin class get with the getClass method from dataservice
-   * @param classArray array of classes with latin and french name
-   * @returns 
-   */
-  private getFrenchClass(latinClass : string, classArray : ClassApi[]) : ClassApi |undefined {
-
-    return classArray.find(item => item.latinName == latinClass)
-    
-  }
 
   handleClick() {
     const result = this.dataService.getDetail(this.specie!.scientific_name)
