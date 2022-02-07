@@ -1,6 +1,13 @@
-import { ClassApi } from './typeApi';
+export interface NameApi {
+    taxonname:string,
+    primary:boolean,
+    language:string
+}
 
-
+export interface ClassApi {
+    latinName: string,
+    frenchName: string
+}
 export interface Specie {
     "taxonid": number,
     "scientific_name": string,

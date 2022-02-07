@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { Specie, classArray } from '../specie';
+import { Specie, classArray, ClassApi, NameApi } from '../specie';
 import { Observable } from 'rxjs';
-import { ClassApi } from '../typeApi';
-
 import { Category, categoryOption } from '../category';
 
 
@@ -25,7 +23,8 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
     
     this.getCategoryOption(this.specie!.category, categoryOption)
-    this.dataService.getClass(this.specie!.taxonid).subscribe((item)=> this.class = this.getFrenchClass(item, classArray))
+    // this.dataService.getClass(this.specie!.taxonid).subscribe((item)=> this.class = this.getFrenchClass(item, classArray))
+    this.dataService.getClass(this.specie!.taxonid).subscribe(item => this.class = item)
     
   }
 
@@ -35,8 +34,7 @@ export class CardComponent implements OnInit {
    * @param catOption array of categories with their bootstrap options
    */
   private getCategoryOption(category :string, catOption : Category[]): void{
-    const currentCat = catOption.find(cat => cat.categoryName === category)
-    this.category = currentCat
+    this.category = catOption.find(cat => cat.categoryName === category)
   }
   
   /**
@@ -52,6 +50,18 @@ export class CardComponent implements OnInit {
   }
 
   handleClick() {
-    this.dataService.getDetail(this.specie!.scientific_name).subscribe(item => console.log(item.taxonname))
+    const result = this.dataService.getDetail(this.specie!.scientific_name)
+    if (result) {
+      result.subscribe(item => console.log(this.chooseName(item)))
+    }
+  }
+
+  chooseName(nameArray: NameApi[]) {
+    if (nameArray) {
+      console.log("true")
+    }
+    else {
+      console.log('false')
+    }
   }
 }

@@ -5,8 +5,12 @@
             <h5 *ngIf="category" class="card-subtitle my-3 text-muted">
                 <span [class]="category.badgeClass" class="badge bg-gradient">{{category.categoryMessage}}</span>
             </h5>
-            <p *ngIf="class" class="fw-bold">{{class.frenchName}}</p>
+            <p *ngIf="class ; else classSpinner" class="fw-bold">{{class.frenchName}}</p>
+            <ng-template #classSpinner>
 
+                <app-spinner></app-spinner>
+
+        </ng-template>
             <button type="button" (click)="handleClick()" class="btn" type="button" data-bs-toggle="collapse" aria-expanded="false" data-target="#collapseExample">En savoir
                 plus</button>
 

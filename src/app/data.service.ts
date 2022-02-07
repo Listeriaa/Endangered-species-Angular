@@ -3,15 +3,14 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap, filter } from 'rxjs/operators';
-import {Specie} from './specie'
-import { NameApi } from './typeApi';
+import { Specie, classArray, NameApi, ClassApi  } from './specie';
 
 
+type LatinClass<T extends {latinName: string}> = T[keyof T]
 
 @Injectable({
   providedIn: 'root'
 })
-
 
 export class DataService {
 
@@ -49,20 +48,37 @@ export class DataService {
    * @param taxonid id number of the specie, in the object specie returned by API
    * @returns Observable string of the latin class of the specie
    */
-  getClass(taxonid: number) {
+  getClass(taxonid: number) : Observable<ClassApi>{
     //console.log("je suis dans getClass")
     const url = `${this.apiUrl}species/id/${taxonid}?token=${environment.apiKey}`
     return this.http.get<any>(url)
     .pipe(
 
-      map(response => response.result[0].class),
-      // tap(item =>console.log(item)),
-      catchError(this.handleError('getClass', []))
+      map(response => this.getFrenchClass(response.result[0].class, classArray)),
+      // tap(item =>console.log('after map response.result',item)),
+      // catchError(this.handleError('getClass', []))
     )
   }
 
+ 
+  /**
+   * Method to get the french class group of the specie
+   * @param latinClass name of the latin class get with the getClass method from dataservice
+   * @param classArray array of classes with latin and french name
+   * @returns 
+   */
+   private getFrenchClass(latinClass : LatinClass<ClassApi>, classArray : ClassApi[]) : ClassApi{
 
-  getDetail(latinName: string) {
+    //function to return only classApi type 
+    const getData = (latinClass: LatinClass<ClassApi>) => (classArray.find((item) => latinClass === item.latinName) as ClassApi);
+
+    // const result = classArray.find((item: ClassApi )=> item.latinName == latinClass)
+    // const resulttype = typeof result
+      return getData(latinClass)
+    
+  }
+
+  getDetail(latinName: string): Observable<NameApi[]> | undefined {
     const url = `${this.apiUrl}species/common_names/${latinName}?token=${environment.apiKey}`
 
     return this.http.get<any>(url)
