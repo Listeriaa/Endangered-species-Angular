@@ -11,13 +11,22 @@
         <app-spinner></app-spinner>
       </ng-template>
 
+      <div class="d-grid gap-2 col-6 mx-auto">
       <button type="button" (click)="handleClick()" class="btn btn-outline-dark mt-3" type="button"
         aria-expanded="false">{{ showMore ? 'Réduire' : 'En savoir plus'}}</button>
+      </div>
 
       <div [@openClose]="showMore ? true : false" class="my-2">
         <div class="card card-info card-body d-flex justify-content-center">
-          <a class="link-dark fw-bold mb-3" target="_blank">Fiche détaillée de l'IUCN</a>
-          <app-spinner class = "mb-2"></app-spinner>
+          <a class="link-dark fw-bold mb-3" href="{{url}}" target="_blank" rel="noopener">Fiche détaillée de l'IUCN</a>
+          <div *ngIf ="name; else spinnerName" class="loading d-flex align-items-center my-3">
+            <span class ="fw-bold">Nom commun</span> : {{name}} {{english ?('(GB)'): ''}}
+          </div>
+          <ng-template #spinnerName>
+
+            <app-spinner  class = "mb-2"></app-spinner>
+
+          </ng-template>
           <app-spinner></app-spinner>
           <!-- <div class="threat d-flex align-items-center">
                         <strong>Loading...</strong>

@@ -29,20 +29,25 @@ export class CardComponent implements OnInit {
 
   @Input() specie?: Specie
 
-  category? : Category
+  category?: Category
 
-  class? :ClassApi
+  class?: ClassApi
 
-  name? : string
+  name?: string
 
-  showMore : boolean = false
+  url? : string
 
-  constructor(private  dataService: DataService) {}
+  english?: boolean
+
+  showMore: boolean = false
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
 
     this.getCategoryOption(this.specie!.category, categoryOption)
 
+    //this.dataService.getUrl(this.specie!.scientific_name).subscribe(item => this.url = item)
     //this.dataService.getClass(this.specie!.taxonid).subscribe(item => this.class = item)
 
   }
@@ -52,46 +57,79 @@ export class CardComponent implements OnInit {
    * @param category category from the specie object from api
    * @param catOption array of categories with their bootstrap options
    */
-  private getCategoryOption(category :string, catOption : Category[]): void{
+  private getCategoryOption(category: string, catOption: Category[]): void {
     this.category = catOption.find(cat => cat.categoryName === category)
   }
 
 
   handleClick() {
-    const result = this.dataService.getName(this.specie!.scientific_name)
     this.showMore = !this.showMore
-    console.log(this.showMore)
-    if (result) {
-        result.subscribe(item => this.name = this.chooseName(item))
+
+    //fetch of name
+    if (!this.name) {
+      const result = this.dataService.getName(this.specie!.scientific_name)
+      if (result) {
+        result.subscribe(item => {
+
+          [this.name, this.english] = this.chooseName(item)
+
+        })
       }
       else {
-        this.name = 'Non renseigné'
+        this.name = "Non renseigné"
+        this.english = false
       }
+    }
+
+    //fetch of url
+
+    if (!this.url) {
+      const result = this.dataService.getUrl(this.specie!.scientific_name)
+
+      if (result){
+        result.subscribe(item => this.url = item)
+      }
+      else {
+        this.url = 'https://www.iucnredlist.org'
+      }
+    }
 
   }
 
-  chooseName(nameArray: NameApi[]): string | undefined {
-    if (nameArray.length === 0) {
-      return 'Non renseigné'
+  chooseName(nameArray: NameApi[]): [string, boolean] {
 
+    let name: string = ''
+    let english: boolean = false
+    let filled = false
+
+    if (nameArray.length === 0) {
+      name = 'Non renseigné'
+      console.log("if tableau vide", english)
     }
     else {
-      let filled = false
       nameArray.map(item => {
 
         if (!filled && Object.values(item).includes('fre')) {
           filled = true
-          return item.taxonname
+          name = item.taxonname
+          console.log("if francais", english)
+
         }
-        else if (!filled && Object.values(item).includes('eng')){
+        else if (!filled && Object.values(item).includes('eng')) {
           filled = true
-          return item.taxonname
+          name = item.taxonname
+          english = true
+          console.log("if anglais", english)
+
         }
-        else {
-          return 'Non renseigné'
+        else if (!filled) {
+          filled = true
+          name = 'Non renseigné'
+          console.log("else", english)
+
         }
       })
-      return
     }
+    return [name, english]
   }
 }

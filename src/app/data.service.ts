@@ -50,14 +50,14 @@ export class DataService {
    * @returns Observable string of the latin class of the specie
    */
   getClass(taxonid: number) : Observable<ClassApi>{
-    //console.log("je suis dans getClass")
+
     const url = `${this.apiUrl}species/id/${taxonid}?token=${environment.apiKey}`
     return this.http.get<any>(url)
     .pipe(
 
       map(response => this.getFrenchClass(response.result[0].class, classArray)),
       // tap(item =>console.log('after map response.result',item)),
-      // catchError(this.handleError('getClass', []))
+      //catchError(this.handleError('getClass', []))
     )
   }
 
@@ -73,7 +73,7 @@ export class DataService {
     //function to return only classApi type
     const getData = (latinClass: LatinClass<ClassApi>) => (classArray.find((item) => latinClass === item.latinName) as ClassApi);
 
-      return getData(latinClass)
+    return getData(latinClass)
 
   }
 
@@ -86,6 +86,16 @@ export class DataService {
       map(response => response.result.filter((item : NameApi) =>  item.language === 'fre' || item.language === 'eng')),
 
       catchError(this.handleError('getClass', []))
+    )
+  }
+
+  getUrl(latinName: string): Observable<string> {
+    const url = `${this.apiUrl}weblink/${latinName}?token=${environment.apiKey}`
+
+    return this.http.get<any>(url)
+    .pipe(
+      map(response => response.rlurl),
+      tap(item => console.log(item))
     )
   }
 }
