@@ -98,4 +98,16 @@ export class DataService {
       tap(item => console.log(item))
     )
   }
+
+  getThreats(id: number) {
+    const url = `${this.apiUrl}threats/species/id/${id}?token=${environment.apiKey}`
+
+    return this.http.get<any>(url)
+    .pipe(
+      map(response => response.result),
+      map(responseArray => responseArray.map((item :{code: string})=> item.code.split('.')[0])),
+      map(codeArray => [...new Set(codeArray)]),
+
+    )
+  }
 }

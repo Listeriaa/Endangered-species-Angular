@@ -37,6 +37,8 @@ export class CardComponent implements OnInit {
 
   url? : string
 
+  threats?: string[]
+  
   english?: boolean
 
   showMore: boolean = false
@@ -47,7 +49,6 @@ export class CardComponent implements OnInit {
 
     this.getCategoryOption(this.specie!.category, categoryOption)
 
-    //this.dataService.getUrl(this.specie!.scientific_name).subscribe(item => this.url = item)
     //this.dataService.getClass(this.specie!.taxonid).subscribe(item => this.class = item)
 
   }
@@ -94,6 +95,15 @@ export class CardComponent implements OnInit {
       }
     }
 
+    //fetch of threats
+    const test = this.dataService.getThreats(this.specie!.taxonid)
+
+    if (test){
+      test.subscribe()
+    }
+    else {
+    }
+
   }
 
   chooseName(nameArray: NameApi[]): [string, boolean] {
@@ -104,7 +114,6 @@ export class CardComponent implements OnInit {
 
     if (nameArray.length === 0) {
       name = 'Non renseigné'
-      console.log("if tableau vide", english)
     }
     else {
       nameArray.map(item => {
@@ -112,20 +121,17 @@ export class CardComponent implements OnInit {
         if (!filled && Object.values(item).includes('fre')) {
           filled = true
           name = item.taxonname
-          console.log("if francais", english)
 
         }
         else if (!filled && Object.values(item).includes('eng')) {
           filled = true
           name = item.taxonname
           english = true
-          console.log("if anglais", english)
 
         }
         else if (!filled) {
           filled = true
           name = 'Non renseigné'
-          console.log("else", english)
 
         }
       })
