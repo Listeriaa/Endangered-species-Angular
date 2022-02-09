@@ -6,8 +6,32 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
 </head>
 <body>
   <app-root></app-root>
+
+<script>
+  VANTA.BIRDS({
+    el: "#vanta-canvas",
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 200.00,
+    minWidth: 200.00,
+    scale: 1.00,
+    scaleMobile: 1.00,
+    backgroundColor: 0xffffff,
+    color2: 0x0,
+    colorMode: "lerpGradient",
+    birdSize: 1.80,
+    wingSpan: 23.00,
+    separation: 38.00,
+    alignment: 59.00,
+    backgroundAlpha: 0.73,
+
+  })
+</script>
 </body>
 </html>
