@@ -3,29 +3,48 @@ import { DataService } from '../data.service';
 import { Specie, classArray, ClassApi, NameApi } from '../specie';
 import { Observable } from 'rxjs';
 import { Category, categoryOption } from '../category';
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  // ...
+} from '@angular/animations';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.css'],
+  animations: [
+    trigger('openClose', [
+      state('true', style({ height: '*', opacity: 1 })),
+      state('false', style({ height: '0px', opacity: 0 })),
+      transition('false <=> true', animate(500))
+    ])
+  ],
 })
+
 export class CardComponent implements OnInit {
 
   @Input() specie?: Specie
-    
+
   category? : Category
-  
+
   class? :ClassApi
-  
+
+  name? : string
+
+  showMore : boolean = false
+
   constructor(private  dataService: DataService) {}
-  
+
   ngOnInit(): void {
-    
+
     this.getCategoryOption(this.specie!.category, categoryOption)
-    // this.dataService.getClass(this.specie!.taxonid).subscribe((item)=> this.class = this.getFrenchClass(item, classArray))
-    this.dataService.getClass(this.specie!.taxonid).subscribe(item => this.class = item)
-    
+
+    //this.dataService.getClass(this.specie!.taxonid).subscribe(item => this.class = item)
+
   }
 
   /**
@@ -36,21 +55,43 @@ export class CardComponent implements OnInit {
   private getCategoryOption(category :string, catOption : Category[]): void{
     this.category = catOption.find(cat => cat.categoryName === category)
   }
-  
+
 
   handleClick() {
-    const result = this.dataService.getDetail(this.specie!.scientific_name)
+    const result = this.dataService.getName(this.specie!.scientific_name)
+    this.showMore = !this.showMore
+    console.log(this.showMore)
     if (result) {
-      result.subscribe(item => console.log(this.chooseName(item)))
-    }
+        result.subscribe(item => this.name = this.chooseName(item))
+      }
+      else {
+        this.name = 'Non renseigné'
+      }
+
   }
 
-  chooseName(nameArray: NameApi[]) {
-    if (nameArray) {
-      console.log("true")
+  chooseName(nameArray: NameApi[]): string | undefined {
+    if (nameArray.length === 0) {
+      return 'Non renseigné'
+
     }
     else {
-      console.log('false')
+      let filled = false
+      nameArray.map(item => {
+
+        if (!filled && Object.values(item).includes('fre')) {
+          filled = true
+          return item.taxonname
+        }
+        else if (!filled && Object.values(item).includes('eng')){
+          filled = true
+          return item.taxonname
+        }
+        else {
+          return 'Non renseigné'
+        }
+      })
+      return
     }
   }
 }

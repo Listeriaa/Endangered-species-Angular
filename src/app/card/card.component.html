@@ -1,31 +1,31 @@
-<div *ngIf="specie"  class="col col-md-auto  my-3 ">
-    <div class="card text-center" style="width: 18rem;">
-        <div class="card-body shadow ">
-            <h5  class="card-title text-uppercase fw-bold">{{specie.scientific_name}}</h5>
-            <h5 *ngIf="category" class="card-subtitle my-3 text-muted">
-                <span [class]="category.badgeClass" class="badge bg-gradient">{{category.categoryMessage}}</span>
-            </h5>
-            <p *ngIf="class ; else classSpinner" class="fw-bold">{{class.frenchName}}</p>
-            <ng-template #classSpinner>
+<div *ngIf="specie" class="col col-md-auto  my-3 ">
+  <div class="card text-center" style="width: 18rem;">
+    <div class="card-body shadow ">
+      <h5 class="card-title text-uppercase fw-bold">{{specie.scientific_name}}</h5>
+      <h5 *ngIf="category" class="card-subtitle my-3 text-muted">
+        <span [class]="category.badgeClass" class="badge bg-gradient">{{category.categoryMessage}}</span>
+      </h5>
+      <p *ngIf="class ; else classSpinner" class="fw-bold">{{class.frenchName}}</p>
 
-                <app-spinner></app-spinner>
+      <ng-template #classSpinner>
+        <app-spinner></app-spinner>
+      </ng-template>
 
-        </ng-template>
-            <button type="button" (click)="handleClick()" class="btn" type="button" data-bs-toggle="collapse" aria-expanded="false" data-target="#collapseExample">En savoir
-                plus</button>
+      <button type="button" (click)="handleClick()" class="btn btn-outline-dark mt-3" type="button"
+        aria-expanded="false">{{ showMore ? 'Réduire' : 'En savoir plus'}}</button>
 
-            <div class="collapse test my-3" id="collapseExample" data-open="false">
-                <div class="card card-info card-body d-flex justify-content-center">
-                    <a class="link-dark fw-bold mb-3" target="_blank">Fiche détaillée de l'IUCN</a>
-                    <app-spinner></app-spinner>
-                    <app-spinner></app-spinner>
-                    <!-- <div class="threat d-flex align-items-center">
+      <div [@openClose]="showMore ? true : false" class="my-2">
+        <div class="card card-info card-body d-flex justify-content-center">
+          <a class="link-dark fw-bold mb-3" target="_blank">Fiche détaillée de l'IUCN</a>
+          <app-spinner class = "mb-2"></app-spinner>
+          <app-spinner></app-spinner>
+          <!-- <div class="threat d-flex align-items-center">
                         <strong>Loading...</strong>
                         <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
                     </div> -->
-                </div>
-
-            </div>
         </div>
+
+      </div>
     </div>
+  </div>
 </div>

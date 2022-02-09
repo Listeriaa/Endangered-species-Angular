@@ -15,13 +15,13 @@ type LatinClass<T extends {latinName: string}> = T[keyof T]
 export class DataService {
 
   constructor(private http : HttpClient) { }
-  
+
   //private apiUrl = "https://api.endangered-species.laetitia-dev.com/api/v1"
   private apiUrl = "https://apiv3.iucnredlist.org/api/v3/"
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-  
+
       console.error(error); // log to console instead
 
       return of(result as T);
@@ -35,10 +35,10 @@ export class DataService {
   getList(): Observable<Specie[]> {
 
     const url = `${this.apiUrl}country/getspecies/FR?token=${environment.apiKey}`
-    
+
     return this.http.get<any>(url)
     .pipe(
-      
+
       map(response => response.result.filter((item: Specie)=> item.category === "CR" || item.category === "EN" || item.category === "VU" || item.category === "EX" || item.category === "EW")),
 
       catchError(this.handleError('getList', [])))
@@ -61,31 +61,30 @@ export class DataService {
     )
   }
 
- 
+
   /**
    * Method to get the french class group of the specie
    * @param latinClass name of the latin class get with the getClass method from dataservice
    * @param classArray array of classes with latin and french name
-   * @returns 
+   * @returns
    */
    private getFrenchClass(latinClass : LatinClass<ClassApi>, classArray : ClassApi[]) : ClassApi{
 
-    //function to return only classApi type 
+    //function to return only classApi type
     const getData = (latinClass: LatinClass<ClassApi>) => (classArray.find((item) => latinClass === item.latinName) as ClassApi);
 
       return getData(latinClass)
-    
+
   }
 
-  getDetail(latinName: string): Observable<NameApi[]> | undefined {
+  getName(latinName: string): Observable<NameApi[]> | undefined {
     const url = `${this.apiUrl}species/common_names/${latinName}?token=${environment.apiKey}`
 
     return this.http.get<any>(url)
     .pipe(
 
       map(response => response.result.filter((item : NameApi) =>  item.language === 'fre' || item.language === 'eng')),
-      
-      tap(item =>console.log(item)),
+
       catchError(this.handleError('getClass', []))
     )
   }
