@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { Specie, classArray, ClassApi, NameApi } from '../specie';
+import { Specie, classArray, threatArray, ClassApi, NameApi, Threat } from '../specie';
 import { Observable } from 'rxjs';
 import { Category, categoryOption } from '../category';
 import {
@@ -37,8 +37,8 @@ export class CardComponent implements OnInit {
 
   url? : string
 
-  threats?: string[]
-  
+  threats?: string[] | string
+
   english?: boolean
 
   showMore: boolean = false
@@ -96,12 +96,13 @@ export class CardComponent implements OnInit {
     }
 
     //fetch of threats
-    const test = this.dataService.getThreats(this.specie!.taxonid)
+    const result = this.dataService.getThreats(this.specie!.taxonid)
 
-    if (test){
-      test.subscribe()
+    if (result){
+      result.subscribe(item =>  this.getFrenchThreat(item, threatArray))
     }
     else {
+      this.threats = "Se référer à la fiche détaillée"
     }
 
   }
@@ -138,4 +139,18 @@ export class CardComponent implements OnInit {
     }
     return [name, english]
   }
+
+  getFrenchThreat(apiArray : string[], threatArray : Threat ) {
+
+    let messageArray : string[] = []
+
+    console.log('apiArray', apiArray)
+
+   console.log('filter',apiArray.map(code => {
+      threatArray.filter(threat => code in threat.codes)
+      //.map(threat => threat.message)
+    }))
+  }
+
+
 }

@@ -106,7 +106,7 @@ export class DataService {
     .pipe(
       map(response => response.result),
       map(responseArray => responseArray.map((item :{code: string})=> item.code.split('.')[0])),
-      map(codeArray => [...new Set(codeArray)]),
+      map(codeArray => [...new Set<string>(codeArray)]),
 
     )
   }

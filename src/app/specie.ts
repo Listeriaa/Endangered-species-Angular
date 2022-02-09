@@ -110,3 +110,28 @@ export const classArray: ClassApi[] = [
 
 
 ]
+
+export const threatArray = [
+  {
+    codes : ['1','2','3','4','7'],
+    message : "Modification de l'écosystème induite par l'homme"
+  },
+  {
+    codes: ['5', '6'],
+    message : "Exploitation, harcèlement ou mortalité directe d'espèces indigènes"
+  },
+  {
+    codes: ['10', '11'],
+    message : "Changements climatiques ou causes naturelles (volcanisme, tremblements de terre...)"
+  },
+  {
+    codes: ['8'],
+    message : "Compétition / prédation / contamination par des espèces envahissantes"
+  },
+  {
+    codes: ['9'],
+    message : "Pollution"
+  }
+]
+
+export type Threat = typeof threatArray
