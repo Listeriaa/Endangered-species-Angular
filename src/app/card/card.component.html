@@ -19,15 +19,26 @@
       <div [@openClose]="showMore ? true : false" class="my-2">
         <div class="card card-info card-body d-flex justify-content-center">
           <a class="link-dark fw-bold mb-3" href="{{url}}" target="_blank" rel="noopener">Fiche détaillée de l'IUCN</a>
-          <div *ngIf ="name; else spinnerName" class="loading d-flex align-items-center my-3">
-            <span class ="fw-bold">Nom commun</span> : {{name}} {{english ?('(GB)'): ''}}
+          <div *ngIf ="name; else spinnerName" class="loading d-flex align-items-left my-3">
+            <span class ="fw-bold">Nom commun : </span>{{name}} {{english ?('(GB)'): ''}}
           </div>
           <ng-template #spinnerName>
 
             <app-spinner  class = "mb-2"></app-spinner>
 
           </ng-template>
-          <app-spinner></app-spinner>
+          <div *ngIf ="threats; else spinnerThreat" class="loading card-text d-flex align-items-left my-3">
+            <ul class = "list-group list-group-flush">
+              <span class ="fw-bold">Menaces : </span>
+
+              <li class="list-group-item" *ngFor="let threat of threats">{{threat}}</li>
+            </ul>
+          </div>
+          <ng-template #spinnerThreat>
+
+            <app-spinner  class = "mb-2"></app-spinner>
+
+          </ng-template>
           <!-- <div class="threat d-flex align-items-center">
                         <strong>Loading...</strong>
                         <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>

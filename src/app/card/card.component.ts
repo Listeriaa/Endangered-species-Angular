@@ -20,7 +20,7 @@ import {
     trigger('openClose', [
       state('true', style({ height: '*', opacity: 1 })),
       state('false', style({ height: '0px', opacity: 0 })),
-      transition('false <=> true', animate(500))
+      transition('false <=> true', animate(300))
     ])
   ],
 })
@@ -37,7 +37,7 @@ export class CardComponent implements OnInit {
 
   url? : string
 
-  threats?: string[] | string
+  threats?: string[]
 
   english?: boolean
 
@@ -99,10 +99,10 @@ export class CardComponent implements OnInit {
     const result = this.dataService.getThreats(this.specie!.taxonid)
 
     if (result){
-      result.subscribe(item =>  this.getFrenchThreat(item, threatArray))
+      result.subscribe(item => this.threats = this.getFrenchThreat(item, threatArray))
     }
     else {
-      this.threats = "Se référer à la fiche détaillée"
+      this.threats = ["Se référer à la fiche détaillée"]
     }
 
   }
@@ -146,11 +146,34 @@ export class CardComponent implements OnInit {
 
     console.log('apiArray', apiArray)
 
-   console.log('filter',apiArray.map(code => {
-      threatArray.filter(threat => code in threat.codes)
-      //.map(threat => threat.message)
-    }))
+    function inThreatArray(code: string) {
+
+      return threatArray.map(threat => {
+        if (threat.codes.includes(code)) {
+          console.log('threat.codes',threat.codes)
+          console.log('code',code)
+          return threat.message
+        }
+        else {
+          return false
+        }
+      })
+    }
+    apiArray.forEach(code => {
+
+        messageArray.push(...threatArray.filter(threat => threat.codes.includes(code)).map(threat => threat.message))
+
+
+    })
+    return messageArray.filter((message, index, array) => {
+      console.log('index', index, 'message', message)
+      if (index>0) {
+        return message !== array[index-1]
+      }
+      else {
+        return true
+      }
+    })
+
   }
-
-
 }
