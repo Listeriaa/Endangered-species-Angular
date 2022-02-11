@@ -19,8 +19,8 @@
       <div [@openClose]="showMore ? true : false" class="my-2">
         <div class="card card-info card-body d-flex justify-content-center">
           <a class="link-dark fw-bold mb-3" href="{{url}}" target="_blank" rel="noopener">Fiche détaillée de l'IUCN</a>
-          <div *ngIf ="name; else spinnerName" class="loading d-flex align-items-left my-3">
-            <span class ="fw-bold">Nom commun : </span>{{name}} {{english ?('(GB)'): ''}}
+          <div *ngIf ="name; else spinnerName" class="loading align-items-left my-3">
+            <p class ="fw-bold">Nom commun : </p><p>{{name}} {{english ?('(GB)'): ''}}</p>
           </div>
           <ng-template #spinnerName>
 

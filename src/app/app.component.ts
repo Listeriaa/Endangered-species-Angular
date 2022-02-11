@@ -15,7 +15,7 @@ export class AppComponent {
 
   list$?: Observable<Specie[]>;
 
-  numberSpecies?: Observable<any>;
+  numberSpecies?: number;
 
   ngOnInit() {
     //as list$ is typed as Observable, no need for subscription thanks to async in template
@@ -23,4 +23,5 @@ export class AppComponent {
     this.list$ = this.dataService.getList().pipe(shareReplay())
 
   }
+
 }

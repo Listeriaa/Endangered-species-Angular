@@ -1,0 +1,11 @@
+#vanta-canvas {
+  background: url(https://i.pinimg.com/originals/44/6e/3b/446e3b79395a287ca32f7977dd83b290.jpg);
+  background-size: cover;
+}
+#blur{
+  background-color: #0d0d19a1;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 0 solid #000000;
+}
