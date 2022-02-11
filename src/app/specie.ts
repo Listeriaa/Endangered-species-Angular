@@ -77,7 +77,7 @@ export const classArray: ClassApi[] = [
     },
     {
         latinName: 'ANTHOZOA',
-        frenchName: 'Cnidaires'
+        frenchName: 'Cnidaire'
     },
     {
         latinName: 'POLYPODIOPSIDA',
@@ -101,7 +101,7 @@ export const classArray: ClassApi[] = [
     },
     {
         latinName: 'ARACHNIDA',
-        frenchName: 'Arachnides'
+        frenchName: 'Arachnide'
     },
     {
         latinName: 'MARCHANTIOPSIDA',

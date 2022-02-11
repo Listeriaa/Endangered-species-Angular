@@ -49,7 +49,7 @@ export class CardComponent implements OnInit {
 
     this.getCategoryOption(this.specie!.category, categoryOption)
 
-    //this.dataService.getClass(this.specie!.taxonid).subscribe(item => this.class = item)
+    this.dataService.getClass(this.specie!.taxonid).subscribe(item => this.class = item)
 
   }
 

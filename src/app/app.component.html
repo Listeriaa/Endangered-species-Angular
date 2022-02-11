@@ -1,6 +1,6 @@
 <div id="vanta-canvas"></div>
 <div class="container py-5">
-  <div id="blur" class="container text-white py-3 w-75 mb-3">
+  <div class="container text-white py-3 mb-3 bg-custom">
     <h2 class="text-center my-4 fw-bold ">Nombre d'espèces en danger en France :
       <span class="species-number text-danger">{{(list$ | async)?.length}}</span>
     </h2>
@@ -15,7 +15,15 @@
 
     </div>
   </div>
+  <!-- <div class="btn-group d-flex flex-column bg-custom flex-lg-row" role="group" aria-label="Basic example">
+    <button type="button" class="btn text-white">Toutes</button>
 
+    <button type="button" class="btn text-white">Vulnérable</button>
+    <button type="button" class="btn text-white">En danger</button>
+    <button type="button" class="btn text-white">En danger critique</button>
+    <button type="button" class="btn text-white">Eteint</button>
+
+  </div> -->
   <div *ngIf="list$ |async; else loadingBlock" class="row row-cols-auto d-flex justify-content-center">
     <app-card *ngFor="let specie of (list$ |async)" [specie]="specie"></app-card>
   </div>
