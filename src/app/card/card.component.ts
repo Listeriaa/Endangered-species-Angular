@@ -105,6 +105,7 @@ export class CardComponent implements OnInit {
       this.threats = ["Se référer à la fiche détaillée"]
     }
 
+
   }
 
   chooseName(nameArray: NameApi[]): [string, boolean] {
@@ -165,15 +166,15 @@ export class CardComponent implements OnInit {
 
 
     })
-    return messageArray.filter((message, index, array) => {
-      console.log('index', index, 'message', message)
-      if (index>0) {
-        return message !== array[index-1]
-      }
-      else {
-        return true
-      }
+
+    const test : string[]= []
+
+    messageArray.forEach((message) => {
+     if (!test.includes(message)) {
+       test.push(message)
+     }
     })
+    return test
 
   }
 }
