@@ -24,8 +24,7 @@ Re-working the app about endangered species to train myself on Angular (framewor
 - **Feb 2022**: Managed to pass a specie on the componant Card
 - **Feb 2022**: Managed to attribute bootstrap classes and french phylogenic class depending on props
 - **Feb 2022**: Translation for name, and threats OK 
-- **Feb 2022** : deployment on Heroku
-
+- **Feb 2022** : trying to deploy on heroku (issue with env Angular not building)
 ## Challenge 
 
 - First time I'm using Typescript and it is very challenging for me.
