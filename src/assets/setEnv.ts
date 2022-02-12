@@ -33,7 +33,7 @@ writeFileUsingFS('./src/environments/environment.ts', '');
 
 
 // Checks whether command line argument of `prod` was provided signifying production mode
-const isProduction = environment === 'prod';
+const isProduction = environment === 'production';
 
 // choose the correct targetPath based on the environment chosen
 const targetPath = isProduction
