@@ -8,7 +8,7 @@
     "build": "npm run config -- --environment=prod && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "heroku-postbuild": "npm run config -- --environment=production && ng build"
+    "heroku-postbuild": "npm run config -- && ng build"
   },
   "private": true,
   "dependencies": {
