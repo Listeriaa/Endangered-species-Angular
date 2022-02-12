@@ -3,7 +3,6 @@
 var _a = require('fs'), writeFile = _a.writeFile, existsSync = _a.existsSync, mkdirSync = _a.mkdirSync;
 var argv = require('yargs').argv;
 require('dotenv').config();
-console.log(process.env.apiKey)
 var environment = 'production';
 function writeFileUsingFS(targetPath, environmentFileContent) {
     writeFile(targetPath, environmentFileContent, function (err) {
