@@ -8,7 +8,7 @@
     "build": "npm run config -- --environment=prod && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "heroku-postbuild": "npm run ./src/assets/setEnv.js && ng build"
+    "heroku-postbuild": "node ./src/assets/setEnv.js && ng build"
   },
   "private": true,
   "dependencies": {
