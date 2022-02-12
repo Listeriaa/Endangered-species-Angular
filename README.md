@@ -23,7 +23,8 @@ Re-working the app about endangered species to train myself on Angular (framewor
 - **Feb 2022**: Managed to attribute a threat category with options (french name, bootstrap class...) depending on the threat category sent by the API
 - **Feb 2022**: Managed to pass a specie on the componant Card
 - **Feb 2022**: Managed to attribute bootstrap classes and french phylogenic class depending on props
-- **Feb 2022**: Working on french common_name => fetch to api ok, need to work on data treatment (name can be either in French, in English or empty)
+- **Feb 2022**: Translation for name, and threats OK 
+- **Feb 2022** : deployment on Heroku
 
 ## Challenge 
 
@@ -31,5 +32,4 @@ Re-working the app about endangered species to train myself on Angular (framewor
 
 ## TODO
 
-- Still a lot to do, especially the collapse "more info" (need another fetch to API to get french name and type of threats).
 - I would like to add a filter on categories.
