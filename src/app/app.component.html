@@ -10,8 +10,11 @@
 
     </div>
     <div class="text-center my-4 fw-bold ">
-
       <a class="text-white" href="https://www.iucnredlist.org/">IUCN Red List of Threatened Species. Version 2021-2</a>
+
+    </div>
+    <div class="text-center my-4 fw-bold ">
+      <p>En cliquant sur 'En savoir plus', vous trouverez le nom commun français (ou anglais par défaut), les principales menaces subies par l'espèce ainsi qu'un lien redirigeant vers la fiche détaillée officielle.</p>
 
     </div>
   </div>
@@ -24,13 +27,15 @@
     <button type="button" class="btn text-white">Eteint</button>
 
   </div> -->
+
   <div *ngIf="list$ |async; else loadingBlock" class="row row-cols-auto d-flex justify-content-center">
     <app-card *ngFor="let specie of (list$ |async)" [specie]="specie"></app-card>
+
   </div>
+
   <ng-template #loadingBlock>
     <app-spinner [colorWhite]="true"></app-spinner>
   </ng-template>
-
 </div>
 
 

@@ -6,7 +6,6 @@ import { CardComponent } from './card/card.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

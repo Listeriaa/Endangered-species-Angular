@@ -144,30 +144,14 @@ export class CardComponent implements OnInit {
   getFrenchThreat(apiArray : string[], threatArray : Threat ) {
 
     let messageArray : string[] = []
+    const test : string[]= []
 
-    console.log('apiArray', apiArray)
-
-    function inThreatArray(code: string) {
-
-      return threatArray.map(threat => {
-        if (threat.codes.includes(code)) {
-          console.log('threat.codes',threat.codes)
-          console.log('code',code)
-          return threat.message
-        }
-        else {
-          return false
-        }
-      })
-    }
     apiArray.forEach(code => {
 
         messageArray.push(...threatArray.filter(threat => threat.codes.includes(code)).map(threat => threat.message))
 
 
     })
-
-    const test : string[]= []
 
     messageArray.forEach((message) => {
      if (!test.includes(message)) {
