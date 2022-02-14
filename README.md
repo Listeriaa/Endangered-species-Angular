@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
 
-You can see the application running her [endangered-species](https://endangered-species.laetitia-dev.com/)
+You can see the application running here [endangered-species](https://endangered-species.laetitia-dev.com/)
 
 ## Stack
 
